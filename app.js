@@ -16,17 +16,20 @@ navItems.forEach((item) => {
     });
 });
 
-const carousels = document.querySelectorAll('[data-carousel]');
+const revealElements = document.querySelectorAll('.reveal');
 
-carousels.forEach((carousel) => {
-    const track = carousel.querySelector('.carousel-track');
-    const slides = track.querySelectorAll('img');
-    let index = 0;
+if (revealElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
 
-    if (slides.length > 1) {
-        setInterval(() => {
-            index = (index + 1) % slides.length;
-            track.style.transform = `translateX(-${index * 100}%)`;
-        }, 4000);
-    }
-});
+    revealElements.forEach((element) => {
+        observer.observe(element);
+    });
+}
