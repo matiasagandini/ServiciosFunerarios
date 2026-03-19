@@ -4,9 +4,9 @@
     --text: #1f2937;
     --muted: #6b7280;
     --line: #e5e7eb;
-    --primary: #1f3b57;
-    --primary-2: #315b7f;
-    --accent: #c8a96b;
+    --primary: #2f4a3f;
+    --primary-2: #466457;
+    --accent: #b79a63;
     --shadow: 0 18px 40px rgba(31, 41, 55, 0.08);
     --radius: 22px;
     --max: 1120px;
@@ -177,7 +177,7 @@ nav {
 }
 
 .hero {
-    padding: 9px 0 46px;
+    padding: 10px 0 46px;
 }
 
 .hero-grid {
@@ -203,7 +203,9 @@ nav {
     position: relative;
     overflow: hidden;
     padding: 44px;
-    background: linear-gradient(135deg, rgba(20, 45, 70, 0.98), rgba(38, 73, 105, 0.92));
+    background: linear-gradient(180deg,
+            #2f3e37 0%,
+            #2a3832 100%);
     color: white;
     min-height: 430px;
     display: flex;
@@ -215,10 +217,7 @@ nav {
     content: "";
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at top right, rgba(200, 169, 107, 0.28), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08), transparent 24%);
-    pointer-events: none;
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .hero-card>* {
@@ -522,34 +521,51 @@ footer {
     right: 24px;
     bottom: 24px;
     z-index: 60;
-    width: 62px;
-    height: 62px;
+    width: 66px;
+    height: 66px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #25d366, #1ebe5d);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 14px 34px rgba(37, 211, 102, 0.32);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    animation: whatsappPulse 2.2s infinite;
+    background: #25d366;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .floating-whatsapp:hover {
-    transform: scale(1.08);
-    box-shadow: 0 18px 38px rgba(37, 211, 102, 0.42);
+    transform: translateY(-3px) scale(1.05);
+    background: #22c55e;
+    box-shadow: 0 18px 34px rgba(37, 211, 102, 0.36);
+}
+
+.floating-whatsapp svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+    transform: translate(1px, 1px);
+}
+
+.floating-whatsapp::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(37, 211, 102, 0.45);
+    animation: whatsappPulse 2.2s ease-out infinite;
+    pointer-events: none;
 }
 
 @keyframes whatsappPulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.35);
+        transform: scale(1);
+        opacity: 0.7;
     }
-
     70% {
-        box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+        transform: scale(1.45);
+        opacity: 0;
     }
-
     100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        transform: scale(1.45);
+        opacity: 0;
     }
 }
 
@@ -646,7 +662,7 @@ footer {
     gap: 28px;
     padding: 42px;
     border-radius: 26px;
-    background: linear-gradient(135deg, #1f3b57 0%, #315b7f 100%);
+    background: #2f3e37;
     color: #fff;
     box-shadow: 0 20px 50px rgba(31, 59, 87, 0.18);
 }
@@ -727,5 +743,108 @@ footer {
 
     .contact-banner-actions a {
         width: 100%;
+    }
+}
+
+.important-card {
+    background: linear-gradient(180deg, rgba(47, 74, 63, 0.08), rgba(255, 255, 255, 0.92));
+    border: 1px solid rgba(47, 74, 63, 0.14);
+}
+
+.important-card h3 {
+    font-size: 1.2rem;
+}
+
+.contact-main .btn {
+    background: #ffffff;
+    color: #2f3e37;
+}
+
+.contact-main .btn:hover {
+    background: #eaeaea;
+}
+
+.contact-main .btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+.contact-main .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-main .btn {
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.wsp-tooltip {
+    position: fixed;
+    right: 98px;
+    bottom: 34px;
+    z-index: 61;
+    max-width: 260px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px rgba(31, 41, 55, 0.14);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.wsp-tooltip.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.wsp-tooltip::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    bottom: 22px;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transform: rotate(-45deg);
+}
+
+.wsp-tooltip span {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.wsp-tooltip button {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.wsp-tooltip button:hover {
+    color: var(--text);
+}
+
+@media (max-width: 760px) {
+    .wsp-tooltip {
+        right: 86px;
+        bottom: 24px;
+        max-width: 220px;
+        padding: 12px 14px;
     }
 }

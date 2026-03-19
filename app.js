@@ -1,6 +1,8 @@
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 const navItems = document.querySelectorAll('#navLinks a');
+const wspTooltip = document.getElementById('wspTooltip');
+const closeWspTooltip = document.getElementById('closeWspTooltip');
 
 if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', () => {
@@ -31,5 +33,21 @@ if (revealElements.length > 0) {
 
     revealElements.forEach((element) => {
         observer.observe(element);
+    });
+}
+
+if (wspTooltip) {
+    setTimeout(() => {
+        wspTooltip.classList.add('show');
+
+        setTimeout(() => {
+            wspTooltip.classList.remove('show');
+        }, 6000);
+    }, 5000);
+}
+
+if (closeWspTooltip && wspTooltip) {
+    closeWspTooltip.addEventListener('click', () => {
+        wspTooltip.classList.remove('show');
     });
 }
